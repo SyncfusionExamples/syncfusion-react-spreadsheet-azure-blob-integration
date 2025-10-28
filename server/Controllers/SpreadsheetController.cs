@@ -14,10 +14,13 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SpreadsheetController : ControllerBase
     {
+        // Read Azure Blob Storage settings from configuration
         private readonly string _storageConnectionString;
         private readonly string _storageContainerName;
+        // Constructor for SpreadsheetController
         public SpreadsheetController(IConfiguration configuration)
         {
+            // Fetch the Azure blob storage details from appsettings.json
             _storageConnectionString = configuration.GetValue<string>("connectionString");
             _storageContainerName = configuration.GetValue<string>("containerName");
         }

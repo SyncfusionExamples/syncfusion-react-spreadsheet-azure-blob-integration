@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|d:\\blog\\azure-opensave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|d:\\blog\\azure-opensave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\controllers\\spreadsheetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|solutionrelative:controllers\\spreadsheetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|d:\\blog\\azure-opensave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|d:\\blog\\azure-opensave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2907E329-AF57-492D-A9AD-5808AE23EF82}|WebAPI.csproj|solutionrelative:weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "WeatherForecast.cs",
+              "ToolTip": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\WeatherForecast.cs",
+              "RelativeToolTip": "WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T08:58:19.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T08:05:43.758Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-28T07:26:07.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SpreadsheetController.cs",
+              "DocumentMoniker": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\Controllers\\SpreadsheetController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SpreadsheetController.cs",
+              "ToolTip": "D:\\blog\\Azure-OpenSave\\syncfusion-react-spreadsheet-azure-blob-integration\\server\\Controllers\\SpreadsheetController.cs",
+              "RelativeToolTip": "Controllers\\SpreadsheetController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwBAAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T07:19:20.224Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

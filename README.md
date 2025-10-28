@@ -4,7 +4,7 @@ A comprehensive sample demonstrating how to integrate the Syncfusion React Sprea
 
 🔗 **Live Demo**
 
-- **React Client Sample (StackBlitz)**: [react-syncfusion-s3-spreadsheet](https://stackblitz.com/edit/react-8ntu1yx9-qbenueyr?file=index.js)
+- **React Client Sample (StackBlitz)**: [react-syncfusion-Azure-spreadsheet](https://stackblitz.com/edit/react-8ntu1yx9-qbenueyr?file=index.js)
 - **Tested files used in the dropdown can be found here**: [Tested Excel files](./client/public/Files/)
 
 📁 **Project Structure**

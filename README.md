@@ -53,7 +53,7 @@ A comprehensive sample demonstrating how to integrate the Syncfusion React Sprea
    ```
    **Update the following in the Server:**
 
-   To configure Azure Blob Storage access, update the `appsettings.json` file with the following settings, right below the "AllowedHosts" section:
+   To configure Azure Blob Storage access, update the `appsettings.json` file with the following settings,
    "connectionString": "your-azure-storage-connection-string",
    "containerName": "your-container-name"
 

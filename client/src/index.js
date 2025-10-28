@@ -23,8 +23,8 @@ function Default() {
   // Function to open a spreadsheet file from Azure blob via an API call
   const openFromAzure = () => {
     spreadsheet.showSpinner();
-    // Make a POST request to the backend API to fetch the file from Azure blob
-    fetch('https://localhost:44341/api/spreadsheet/OpenFromAzure', {
+    // Make a POST request to the backend API to fetch the file from Azure blob.Replace the URL with your local or hosted endpoint URL.
+    fetch('https://localhost:your_port_number/api/spreadsheet/OpenFromAzure', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,8 +60,8 @@ function Default() {
         JSON.stringify({ FitSheetOnOnePage: false }) // PDF layout settings
       );
 
-      // Make a POST request to the backend API to save the file to Azure Blob Storage
-      fetch('https://localhost:44341/api/spreadsheet/SaveToAzure', {
+      // Make a POST request to the backend API to save the file to Azure Blob Storage.Replace the URL with your local or hosted endpoint URL.
+      fetch('https://localhost:your_port_number/api/spreadsheet/SaveToAzure', {
         method: 'POST',
         body: formData,
       })
@@ -128,8 +128,8 @@ function Default() {
           Save to Azure
         </button>
         <SpreadsheetComponent
-          openUrl="https://localhost:44341/api/spreadsheet/Open"
-          saveUrl="https://localhost:44341/api/spreadsheet/Save"
+          openUrl="https://localhost:your_port_number/api/spreadsheet/Open"
+          saveUrl="https://localhost:your_port_number/api/spreadsheet/Save"
           ref={(ssObj) => {
             spreadsheet = ssObj;
           }}

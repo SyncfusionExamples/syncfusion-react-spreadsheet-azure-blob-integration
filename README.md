@@ -33,7 +33,7 @@ A comprehensive sample demonstrating how to integrate the Syncfusion React Sprea
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/<your-username>/syncfusion-react-spreadsheet-azure-blob-integration.git
+   git clone https://github.com/SyncfusionExamples/syncfusion-react-spreadsheet-azure-blob-integration.git
    ```
 
 2. **Setup the Client**

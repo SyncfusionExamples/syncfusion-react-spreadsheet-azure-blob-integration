@@ -1,6 +1,6 @@
 # Syncfusion React Spreadsheet + Azure Blob Integration
 
-A comprehensive sample demonstrating how to integrate the Syncfusion React Spreadsheet component with Azure Blob Storage using an ASP.NET Core Web API backend. This solution includes client-side file selection, secure cloud-based open/save operations, and efficient Excel file handling for modern web applications.
+A comprehensive sample demonstrating how to integrate the [React Spreadsheet](https://www.syncfusion.com/spreadsheet-editor-sdk/react-spreadsheet-editor) component with Azure Blob Storage using an ASP.NET Core Web API backend. This solution includes client-side file selection, secure cloud-based open/save operations, and efficient Excel file handling for modern web applications.
 
 🔗 **Live Demo**
 
@@ -10,20 +10,20 @@ A comprehensive sample demonstrating how to integrate the Syncfusion React Sprea
 📁 **Project Structure**
 
 ```
-├── client/       # React app with Syncfusion Spreadsheet
+├── client/       # React app with Spreadsheet
 └── server/       # ASP.NET Core Web API project
 ```
 
 ✨ **Features**
 
-- Open Excel files directly from Azure Blob into Syncfusion Spreadsheet.
+- Open Excel files directly from Azure Blob into Spreadsheet.
 - Edit spreadsheet data in-browser.
 - Save changes back to Azure Blob with a single click.
 - Dropdown list to select files from Azure Blob.
 
 🧩 **Technologies Used**
 
-- React + Syncfusion Spreadsheet
+- React + Spreadsheet
 - ASP.NET Core Web API
 - Azure Storage Blob for .NET
 - Azure Blob for cloud storage
@@ -80,7 +80,7 @@ A comprehensive sample demonstrating how to integrate the Syncfusion React Sprea
    ];
    ```
 - You can update this list to match the actual Excel files stored in your Azure blob storage container.
-- After selecting a file, click the "Open From Azure" button to load the selected Excel file into the Syncfusion Spreadsheet.
+- After selecting a file, click the "Open From Azure" button to load the selected Excel file into the Spreadsheet.
 - Once you make edits, click the "Save to Azure" button to save the changes back to the same file in your Azure blob container.
 
 📄 **License and copyright**

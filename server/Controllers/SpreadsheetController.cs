@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Syncfusion.EJ2.Spreadsheet;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Specialized;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Syncfusion.EJ2.Spreadsheet;
 
 namespace WebAPI.Controllers
 {
@@ -14,15 +15,24 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SpreadsheetController : ControllerBase
     {
-        // Read Azure Blob Storage settings from configuration
-        private readonly string _storageConnectionString;
+        //Read Azure Blob Storage settings from configuration
+        private readonly BlobServiceClient _blobServiceClient;
         private readonly string _storageContainerName;
-        // Constructor for SpreadsheetController
-        public SpreadsheetController(IConfiguration configuration)
+        private readonly ILogger<SpreadsheetController> _logger;
+        // Constructor for spreadsheetController
+        public SpreadsheetController(IConfiguration configuration, BlobServiceClient blobServiceClient, ILogger<SpreadsheetController> logger)
         {
-            // Fetch the Azure blob storage details from appsettings.json
-            _storageConnectionString = configuration.GetValue<string>("connectionString");
+            // Store the Blob Service client used to access Azure Blob Storage.
+            _blobServiceClient = blobServiceClient;
+            // Store the logger for error tracking and diagnostics.
+            _logger = logger;
+            // Retrieve the target container name from application configuration.
             _storageContainerName = configuration.GetValue<string>("containerName");
+            // Validate that a container name has been configured.
+            if (string.IsNullOrEmpty(_storageContainerName))
+            {
+                throw new InvalidOperationException("Configuration 'containerName' is missing or empty.");
+            }
         }
 
         [HttpPost]
@@ -34,13 +44,16 @@ namespace WebAPI.Controllers
                 using (MemoryStream stream = new MemoryStream())
                 {
                     string fileName = options.FileName + options.Extension;
-
-                    // Connect to Azure Blob Storage
-                    BlobServiceClient blobServiceClient = new BlobServiceClient(_storageConnectionString);
-                    BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(_storageContainerName);
+                    // Get a reference to the configured Azure Blob Storage container
+                    BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(_storageContainerName);
+                    // Get a reference to the target Excel file (blob) within the container.
                     BlockBlobClient blockBlobClient = containerClient.GetBlockBlobClient(fileName);
-
-                    // Download file into memory
+                    // Validate file existence
+                    if (!await blockBlobClient.ExistsAsync())
+                    {
+                        return NotFound("File not found.");
+                    }
+                    // Download file from Azure Blob Storage
                     await blockBlobClient.DownloadToAsync(stream);
                     stream.Position = 0;
 
@@ -58,12 +71,14 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return Content("Error occurred while processing the file.");
+                // Log the exception
+                _logger.LogError(ex, "Failed to load spreadsheet from Azure Blob Storage.");
+                // Return an error response with the exception message.
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error occurred while processing the file.");
             }
         }
 
-        // To receive file details from the client.
+        // Receives file details from client
         public class FileOptions
         {
             public string FileName { get; set; } = string.Empty;
@@ -79,24 +94,22 @@ namespace WebAPI.Controllers
                 // Convert spreadsheet JSON to Excel file stream
                 Stream fileStream = Workbook.Save<Stream>(saveSettings);
                 fileStream.Position = 0; // Reset stream for upload
-
-                // Define Azure Blob Storage client
-                BlobServiceClient blobServiceClient = new BlobServiceClient(_storageConnectionString);
-                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(_storageContainerName);
-
-                // Define blob name using file name and save type
+                // Get the target Blob Storage container.
+                BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(_storageContainerName);
+                // Create the output file name.
                 string blobName = saveSettings.FileName + "." + saveSettings.SaveType.ToString().ToLower();
+                // Get a reference to the destination blob.
                 BlobClient blobClient = containerClient.GetBlobClient(blobName);
-
                 // Upload the Excel file stream to Azure Blob Storage
                 await blobClient.UploadAsync(fileStream, overwrite: true);
-
                 // Return success message
                 return Ok("Excel file successfully saved to Azure Blob Storage.");
             }
             catch (Exception ex)
             {
-                // Handle errors and return message
+                // Log the exception
+                _logger.LogError(ex, "Failed to save spreadsheet to Azure Blob Storage.");
+                // Return an error response with the exception message.
                 return BadRequest("Error saving file to Azure Blob Storage: " + ex.Message);
             }
         }
@@ -109,7 +122,7 @@ namespace WebAPI.Controllers
             if (openRequest.Files.Count != 0)
             {
                 open.File = openRequest.Files[0];
-                if (openRequest.ContainsKey("IsManualCalculationEnabled") && bool.TryParse(openRequest["IsManualCalculationEnabled"].ToString(), out bool flag))
+                if (openRequest.ContainsKey("IsManualCalculationEnabled") && bool.TryParse( openRequest["IsManualCalculationEnabled"].ToString(), out bool flag))
                 {
                     open.IsManualCalculationEnabled = flag;
                 }
@@ -131,4 +144,3 @@ namespace WebAPI.Controllers
         }
     }
 }
-

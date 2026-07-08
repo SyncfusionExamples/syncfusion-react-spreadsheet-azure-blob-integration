@@ -1,16 +1,23 @@
+using Azure.Storage.Blobs;
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
-
 builder.Services.AddControllers();
 
+// Register BlobServiceClient as Singleton
+builder.Services.AddSingleton(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    string connectionString = configuration.GetValue<string>("connectionString");
+    return new BlobServiceClient(connectionString);
+});
+
 var MyAllowSpecificOrigins = "AllowAllOrigins";
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins, builder => {
-        builder.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
+    options.AddPolicy(MyAllowSpecificOrigins, builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
 
@@ -19,9 +26,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-// Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Your Syncfusion license key");
-
 app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
@@ -32,9 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

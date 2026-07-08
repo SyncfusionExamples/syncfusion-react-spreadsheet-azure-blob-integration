@@ -1,15 +1,17 @@
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { SpreadsheetComponent } from '@syncfusion/ej2-react-spreadsheet';
+import { ToastComponent } from '@syncfusion/ej2-react-notifications';
 
 /**
  * Default Spreadsheet sample
  */
 function Default() {
   let spreadsheet;
+  let toastObj = useRef(null);
   const fileList = [
     { name: 'Car Sales Report', extension: '.xlsx' },
     { name: 'Shopping Cart', extension: '.xls' },
@@ -17,14 +19,32 @@ function Default() {
   ];
 
   const fields = { text: 'name' };
-
   const [fileInfo, setFileInfo] = useState(fileList[0]);
   const [loadedFileInfo, setLoadedFileInfo] = useState(null);
+  const showErrorToast = (error) => {
+    toastObj.current.show({
+      title: 'Error',
+      content: `Error importing file: ${error.message || error}`,
+      cssClass: 'e-toast-danger',
+      timeOut: 5000
+    });
+  };
+  
+  const showSuccessToast = () => {
+    toastObj.current.show({ title: 'Success', content: 'Workbook saved successfully to Azure Blob Storage.',
+      cssClass: 'e-toast-success', timeOut: 1000 });
+  }
+
+  const showSuccessLoad = () => {
+    toastObj.current.show({ title: 'Success', content: 'File Loaded successfully from Azure Blob Storage',
+      cssClass: 'e-toast-success', timeOut: 1000 });
+  }
+  
   // Function to open a spreadsheet file from Azure blob via an API call
   const openFromAzure = () => {
     spreadsheet.showSpinner();
     // Make a POST request to the backend API to fetch the file from Azure blob.Replace the URL with your local or hosted endpoint URL.
-    fetch('https://localhost:your_port_number/api/spreadsheet/OpenFromAzure', {
+    fetch('http://localhost:your_port_number/api/spreadsheet/OpenFromAzure', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,9 +59,12 @@ function Default() {
         spreadsheet.hideSpinner();
         // Load the spreadsheet data into the UI
         spreadsheet.openFromJson({ file: data, triggerEvent: true });
+        showSuccessLoad();
       })
       .catch((error) => {
-        window.alert('Error importing file:', error);
+        //window.alert('Error importing file:', error);
+        spreadsheet.hideSpinner();
+        showErrorToast(error);
       });
   };
 
@@ -50,7 +73,6 @@ function Default() {
     // Convert the current spreadsheet to JSON format
     spreadsheet.saveAsJson().then((json) => {
       const formData = new FormData();
-
       // Append necessary data to the form for the API request
       formData.append('FileName', loadedFileInfo.fileName); // Name of the file to save
       formData.append('saveType', loadedFileInfo.saveType); // Save type
@@ -61,7 +83,7 @@ function Default() {
       );
 
       // Make a POST request to the backend API to save the file to Azure Blob Storage.Replace the URL with your local or hosted endpoint URL.
-      fetch('https://localhost:your_port_number/api/spreadsheet/SaveToAzure', {
+      fetch('http://localhost:your_port_number/api/spreadsheet/SaveToAzure', {
         method: 'POST',
         body: formData,
       })
@@ -71,10 +93,10 @@ function Default() {
               `Save request failed with status ${response.status}`
             );
           }
-          window.alert('Workbook saved successfully to Azure Blob Storage.');
+          showSuccessToast();
         })
         .catch((error) => {
-          window.alert('Error saving to server:', error);
+          showErrorToast(error);
         });
     });
   };
@@ -137,6 +159,10 @@ function Default() {
           beforeSave={beforeSave}
           openComplete={openComplete}
         ></SpreadsheetComponent>
+        <ToastComponent
+          ref={toastObj}
+          position={{ X: 'Right', Y: 'Top' }}
+        />
       </div>
     </div>
   );

@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@syncfusion/ej2-base": "31.2.2",
-    "@syncfusion/ej2-react-base": "31.2.2",
-    "@syncfusion/ej2-react-dropdowns": "^31.2.3",
-    "@syncfusion/ej2-react-spreadsheet": "31.2.3",
-    "@syncfusion/ej2-spreadsheet": "31.2.3",
-    "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "@syncfusion/ej2-base": "*",
+    "@syncfusion/ej2-react-base": "*",
+    "@syncfusion/ej2-react-dropdowns": "*",
+    "@syncfusion/ej2-react-notifications": "*",
+    "@syncfusion/ej2-react-spreadsheet": "*",
+    "@syncfusion/ej2-spreadsheet": "*",
+    "react": "*",
+    "react-dom": "*"
   },
   "scripts": {
     "start": "react-scripts start",
